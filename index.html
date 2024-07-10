@@ -4,24 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
-    <title>Contact Address Book</title>
+    <title>Home | Contact Address Book</title>
   </head>
   <body>
     <header class="fixed md:overflow-y-auto  top-0 p-8 w-full gap-8 border-r-2 shadow-sidebot md:min-h-screen flex flex-col md:shadow-sideright  md:left-0 md:w-[18rem] ">
+      <a href="/">
         <h1 class="font-bold text-2xl">Contacts Book</h1>
-        <a href="#" class="md:block w-3/4 rounded-xl bg-[#6987c9] py-2 px-4 text-slate-100 hidden">Create Contact</a> 
+      </a>
+        <a href="/contact/create-contact.html" class="md:block w-3/4 rounded-xl bg-[#6987c9] py-2 px-4 text-slate-100 hidden">Create Contact</a> 
           <nav class="flex pb-2 md:flex-col gap-8 overflow-x-auto w-full md:h-[18rem] overflow-y-auto">
           <div class="container-button
           flex md:flex-col gap-4">
          
-            <a href="#" class="rounded-xl  py-2 px-4 ">Favourite</a>
-            <a href="#" class="rounded-xl  py-2 px-4 ">Trash</a>
+            <!-- <a href="/contact/create-contact.html" class="rounded-xl  py-2 px-4 ">Favourite</a> -->
+            <a href="/contact/trash.html" class="rounded-xl  py-2 px-4 ">Trash</a>
           </div>
           <div class="container-label
           flex md:flex-col gap-4">
-            <a href="#" class="rounded-xl py-2 px-4 ">Label</a>
-            <a href="#" class="rounded-xl py-2 px-4  ">Home</a>
-            <a href="#" class="rounded-xl py-2 px-4  ">Work</a>
+            <a href="/contact/label.html" class="rounded-xl py-2 px-4 ">Label</a>
+            <a href="/contact/label?label='1'" class="rounded-xl py-2 px-4  ">Home</a>
+            <a href="/contact/label?label='1'" class="rounded-xl py-2 px-4  ">Work</a>
           </div>
          
          
@@ -42,10 +44,29 @@
 
       <section class="contacts">
         <h3 class=" text-2xl">Contacts (<span id="count-contacts" class="">0</span>)</h3>
+      <table class="mt-8 table-fixed  w-full text-center">
+        <thead class="border-b-2 border-slate-400 p-2">
+          <th class="p-2 ">Name</th>
+          <th class=" p-2">Phone Number</th>
+          <th class=" p-2">Email</th>
+          <th class=" p-2"> Label</th>
+          <th class=" p-2"> Action</th>
+        </thead>
+      <tbody>
+        <tr class=" ">
+          <td class=" p-2">1</td>
+          <td class=" p-2">1</td>
+          <td class=" p-2">1</td>
+          <td class=" p-2">1</td>
+          <td class=" p-2">action</td>
+        </tr>
+      </tbody>
+    </table>
+      
       </section>
     </main>
    
     <button class="fixed bottom-12 right-10 rounded-full z-30 bg-primary text-slate-100 p-4 md:hidden">C</button>
   </body>
-  <script src="index.js"></script
+  <script type='module' src="index.js"></script
 </html>
