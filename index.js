@@ -1,3 +1,5 @@
+import storage from './helper/storage.js';
+
 const contact = [
   {
     ID: '1',
@@ -71,8 +73,13 @@ const contact = [
   },
 ];
 
-contact.forEach((contact) => {
-  console.log(
-    `${contact['Full Name']} (${contact['Phone']}) ${contact['Email']} in ${contact['Location']}`,
-  );
-});
+const data = storage.getDataStorage('contactData');
+console.log(data, 'storage data');
+// first task
+
+// storage.addDataStorage(contact);
+// contact.forEach((contact) => {
+//   console.log(
+//     `${contact['Full Name']} ${contact['Phone']}) ${contact['Email']}`,
+//   );
+// });
