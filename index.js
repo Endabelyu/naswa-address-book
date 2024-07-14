@@ -1,83 +1,140 @@
-import storage from './helper/storage.js';
-
-const contact = [
+const formElement = document.getElementById('contact-form');
+const inputSearch = document.getElementById('search-input');
+if (getSearchData) {
+  deleteStorageData('searchData');
+}
+console.log(inputSearch);
+const localContactData = getDataStorage();
+const pathname = window.location.pathname;
+const search = window.location.search;
+const url = new URLSearchParams(search);
+const today = new Date().toISOString().substring(0, 10);
+const defaultContacts = [
   {
-    ID: '1',
-    'Full Name': 'John Doe',
-    Phone: '+1-202-555-0143',
-    Email: 'johndoe@example.com',
-    Location: 'New York, USA',
+    id: 1,
+    firstName: 'John',
+    middleName: 'Michael',
+    lastName: 'Doe',
+    company: 'Acme Corp',
+    jobTitle: 'Engineer',
+    email: 'john.doe@example.com',
+    phone: '123-456-7890',
+    streetAddress: '123 Main St',
+    streetAddress2: 'Apt 4B',
+    city: 'Metropolis',
+    province: 'CA',
+    postalCode: '12345',
+    label: [1, 2],
+    note: 'Met at conference.',
+    deletedAt: null,
+    createdAt: today,
   },
   {
-    ID: '2',
-    'Full Name': 'Jane Smith',
-    Phone: '+1-202-555-0198',
-    Email: 'janesmith@example.com',
-    Location: 'Los Angeles, USA',
-  },
-  {
-    ID: '3',
-    'Full Name': 'Michael Johnson',
-    Phone: '+44-20-7946-0958',
-    Email: 'michaeljohnson@example.co.uk',
-    Location: 'London, UK',
-  },
-  {
-    ID: '4',
-    'Full Name': 'Emily Davis',
-    Phone: '+61-2-9374-4000',
-    Email: 'emilydavis@example.com.au',
-    Location: 'Sydney, Australia',
-  },
-  {
-    ID: '5',
-    'Full Name': 'Chris Brown',
-    Phone: '+49-30-12345678',
-    Email: 'chrisbrown@example.de',
-    Location: 'Berlin, Germany',
-  },
-  {
-    ID: '6',
-    'Full Name': 'Patricia Garcia',
-    Phone: '+34-91-123-4567',
-    Email: 'patriciagarcia@example.es',
-    Location: 'Madrid, Spain',
-  },
-  {
-    ID: '7',
-    'Full Name': 'David Wilson',
-    Phone: '+81-3-1234-5678',
-    Email: 'davidwilson@example.jp',
-    Location: 'Tokyo, Japan',
-  },
-  {
-    ID: '8',
-    'Full Name': 'Sophia Martinez',
-    Phone: '+33-1-2345-6789',
-    Email: 'sophiamartinez@example.fr',
-    Location: 'Paris, France',
-  },
-  {
-    ID: '9',
-    'Full Name': 'Liam Robinson',
-    Phone: '+1-416-555-0123',
-    Email: 'liamrobinson@example.ca',
-    Location: 'Toronto, Canada',
-  },
-  {
-    ID: '10',
-    'Full Name': 'Olivia Lee',
-    Phone: '+82-2-1234-5678',
-    Email: 'olivialee@example.kr',
-    Location: 'Seoul, South Korea',
+    id: 2,
+    firstName: 'Jane',
+    middleName: 'Marie',
+    lastName: 'Smith',
+    company: 'Globex Inc',
+    jobTitle: 'Manager',
+    email: 'jane.smith@example.com',
+    phone: '987-654-3210',
+    streetAddress: '456 Elm St',
+    streetAddress2: 'Suite 500',
+    city: 'Smallville',
+    province: 'TX',
+    postalCode: '67890',
+    label: [2],
+    note: 'Works in marketing.',
+    deletedAt: null,
+    createdAt: today,
   },
 ];
+const defaultLabel = [
+  { id: 1, value: 'Home' },
+  { id: 2, value: 'Work' },
+];
+function getLabelValue(id) {
+  const label = defaultLabel.find((item) => item.id === id);
+  return label ? label.value : '';
+}
+if (!localContactData) {
+  addDataStorage('contactData', defaultContacts);
+  addDataLabel(defaultLabel);
+}
 
-const data = storage.getDataStorage('contactData');
-console.log(data, 'storage data');
+function addNewContact(event) {
+  event.preventDefault();
+
+  const formContactData = new FormData(formElement);
+  const newId = localContactData.length ? localContactData.length + 1 : 1;
+  const newContact = {
+    id: newId,
+    firstName: formContactData.get('firstName'),
+    middleName: formContactData.get('middleName'),
+    lastName: formContactData.get('lastName'),
+    company: formContactData.get('company'),
+    jobTitle: formContactData.get('jobTitle'),
+    email: formContactData.get('email'),
+    phone: formContactData.get('phone'),
+    streetAddress: formContactData.get('streetAddress'),
+    streetAddress2: formContactData.get('streetAddress2'),
+    city: formContactData.get('city'),
+    province: formContactData.get('province'),
+    postalCode: formContactData.get('postalCode'),
+    // label: formContactData.get('label'),
+    label: [],
+    notes: formContactData.get('notes'),
+    deletedAt: null,
+    createdAt: today,
+  };
+  const updateDataContact = [...localContactData, newContact];
+  addDataStorage('contactData', updateDataContact);
+  formElement.reset();
+  window.location.replace(window.location.origin);
+}
+
+console.log(formElement, 'form');
+if (formElement) {
+  formElement.addEventListener('submit', addNewContact);
+}
+
+function searchContact() {
+  const localContactData = getDataStorage();
+  const searchValue = inputSearch.value.toLowerCase();
+
+  if (searchValue) {
+    console.log(searchValue.length, 'leng');
+    const searchData = localContactData.filter((contact) => {
+      return (
+        contact.firstName.toLowerCase().includes(searchValue) ||
+        contact.middleName.toLowerCase().includes(searchValue) ||
+        contact.lastName.toLowerCase().includes(searchValue) ||
+        contact.phone.toLowerCase().includes(searchValue)
+      );
+    });
+
+    addDataStorage('searchData', searchData);
+    renderTable();
+  } else {
+    console.log('deletesearch');
+    deleteStorageData('searchData');
+    renderTable();
+  }
+}
+if (!pathname.includes('contact')) {
+  inputSearch.addEventListener('input', searchContact);
+}
+
+if (!search.includes('id') && !pathname.includes('create')) {
+  window.addEventListener('DOMContentLoaded', renderTable);
+} else if (search.includes('id')) {
+  window.addEventListener('DOMContentLoaded', renderEditForm);
+} else {
+  window.addEventListener('DOMContentLoaded', renderCountSideBar);
+}
+
 // first task
 
-// storage.addDataStorage(contact);
 // contact.forEach((contact) => {
 //   console.log(
 //     `${contact['Full Name']} ${contact['Phone']}) ${contact['Email']}`,
