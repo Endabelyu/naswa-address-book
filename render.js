@@ -401,10 +401,12 @@ function adjustURL() {
 
   anchor.forEach((item) => {
     const url = new URL(item.href);
+    let newHref = '';
     console.log(pathname.includes('naswa-address-book'), 'condition adjust');
     if (pathname.includes('naswa-address-book')) {
-      url.pathname = +'/naswa-address-book';
-      item.href = url;
+      newHref = '/naswa-address-book' + url.pathname;
+      console.log(newHref);
+      item.href = newHref;
     }
   });
   console.log(anchor);
