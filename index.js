@@ -49,6 +49,7 @@ const defaultContacts = [
     createdAt: today,
   },
 ];
+console.log(pathname);
 const defaultLabel = [
   { id: 1, value: 'Home' },
   { id: 2, value: 'Work' },
