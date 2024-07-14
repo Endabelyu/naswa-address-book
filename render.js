@@ -390,7 +390,7 @@ function renderLabelSidebar() {
 
 function renderLabelForm() {
   const containerLabel = document.querySelectorAll('.container-select-label');
-  containerLabel.forEach((item)=>
-  )
+  // containerLabel.forEach((item)=>
+  // )
   console.log(containerLabel, 'lables');
 }
