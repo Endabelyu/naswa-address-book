@@ -89,7 +89,6 @@ function renderTable() {
   if (pathname.includes('create')) {
     renderLabelForm();
   }
-  adjustURL();
 }
 function renderEditForm() {
   const localContactData = getDataStorage();
