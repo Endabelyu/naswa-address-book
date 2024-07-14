@@ -2,6 +2,10 @@ function getDataStorage() {
   const data = JSON.parse(localStorage.getItem('contactData'));
   return data;
 }
+function getDataLabel() {
+  const data = JSON.parse(localStorage.getItem('labelContact'));
+  return data;
+}
 function getSearchData() {
   const data = JSON.parse(localStorage.getItem('searchData'));
   return data;
