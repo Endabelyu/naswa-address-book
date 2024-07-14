@@ -372,16 +372,7 @@ function renderLabelSidebar() {
   const labelData = getDataLabel();
   labelData.forEach((item) => {
     const anchorLabel = document.createElement('a');
-
-    if (pathname.includes('naswa-address-book')) {
-      anchorLabel.setAttribute(
-        'href',
-        `/naswa-address-book/label/?label=${item.id}`,
-      );
-    } else {
-      anchorLabel.setAttribute('href', `/label/?label=${item.id}`);
-    }
-
+    anchorLabel.setAttribute('href', `/label/?label=${item.id}`);
     anchorLabel.setAttribute(
       'class',
       'rounded-xl ml-2 py-2 px-4 hover:bg-[#6987c9] hover:text-white',
@@ -410,7 +401,7 @@ function adjustURL() {
 
   anchor.forEach((item) => {
     const url = new URL(item.href);
-
+    console.log(pathname.includes('naswa-address-book'), 'condition adjust');
     if (url.pathname.includes('naswa-address-book')) {
       url.pathname += '/naswa-address-book';
       item.href = url.toString();

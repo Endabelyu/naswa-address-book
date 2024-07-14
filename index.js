@@ -154,12 +154,12 @@ if (!pathname.includes('contact')) {
 
 if (!search.includes('id') && !pathname.includes('create')) {
   window.addEventListener('DOMContentLoaded', renderTable);
-  window.addEventListener('DOMContentLoaded', adjustURL);
 } else if (search.includes('id')) {
   window.addEventListener('DOMContentLoaded', renderEditForm);
 } else {
   window.addEventListener('DOMContentLoaded', renderCountSideBar);
 }
+window.addEventListener('DOMContentLoaded', adjustURL);
 
 // first task
 
