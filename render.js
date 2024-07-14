@@ -404,7 +404,7 @@ function adjustURL() {
     console.log(pathname.includes('naswa-address-book'), 'condition adjust');
     if (pathname.includes('naswa-address-book')) {
       url.pathname = +'/naswa-address-book';
-      item.href = url.toString();
+      item.href = url;
     }
   });
   console.log(anchor);
