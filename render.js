@@ -41,10 +41,7 @@ function renderTable() {
     const editButton = document.createElement('a');
     if (pathname === '/' || pathname === '/naswa-address-book/') {
       if (pathname.includes('naswa-address-book')) {
-        editButton.href = `/naswa-address-book/contact/?id=${item.id}`;
-      } else {
         editButton.href = `/contact/?id=${item.id}`;
-      }
       editButton.innerHTML = `<svg
         xmlns='http://www.w3.org/2000/svg'
         x='0px'
