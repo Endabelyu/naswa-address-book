@@ -403,7 +403,7 @@ function adjustURL() {
     const url = new URL(item.href);
     console.log(pathname.includes('naswa-address-book'), 'condition adjust');
     if (pathname.includes('naswa-address-book')) {
-      url.pathname += '/naswa-address-book';
+      url.pathname = +'/naswa-address-book';
       item.href = url.toString();
     }
   });
