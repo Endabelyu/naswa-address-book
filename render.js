@@ -14,8 +14,10 @@ function renderTable() {
   };
 
   const renderContact =
-    pathname === '/' || pathname === 'naswa-address-book/'
+    pathname === '/'
       ? contactData(localContactData, '/')
+      : pathname === '/naswa-address-book/'
+      ? contactData(localContactData, '/naswa-address-book')
       : pathname.includes('trash')
       ? contactData(localContactData, 'trash')
       : contactData(localContactData, 'label', labelId);
@@ -37,7 +39,7 @@ function renderTable() {
     // Action (Example: Edit button)
     tdAction.classList = 'flex justify-center gap-2 p-2';
     const editButton = document.createElement('a');
-    if (pathname === '/') {
+    if (pathname === '/' || pathname === '/naswa-address-book/') {
       editButton.href = `/contact/?id=${item.id}`;
       editButton.innerHTML = `<svg
         xmlns='http://www.w3.org/2000/svg'
@@ -54,7 +56,6 @@ function renderTable() {
     const deleteButton = document.createElement('button');
 
     deleteButton.addEventListener('click', function () {
-      console.log(pathname === '/', 'paths');
       if (!pathname.includes('trash')) {
         dataToTrash(localContactData, item.id);
       } else if (pathname.includes('trash')) {
@@ -64,7 +65,7 @@ function renderTable() {
       renderTable();
     });
     deleteButton.addEventListener('touchstart', function () {
-      if (pathname == '/') {
+      if (pathname == '/' || pathname === '/naswa-address-book/') {
         dataToTrash(localContactData, item.id);
       } else if (pathname.includes('trash')) {
         deleteData(localContactData, item.id);
@@ -88,6 +89,7 @@ function renderTable() {
   if (pathname.includes('create')) {
     renderLabelForm();
   }
+  adjustURL();
 }
 function renderEditForm() {
   const localContactData = getDataStorage();
@@ -314,7 +316,7 @@ function contactData(data, pathname, id) {
     'datalocal',
   );
   switch (pathname) {
-    case '/':
+    case '/' || '/naswa-address-book/':
       return data.filter((item) => item.createdAt && !item.deletedAt);
     case 'trash':
       console.log('trash');
@@ -371,10 +373,16 @@ function renderLabelSidebar() {
   const labelData = getDataLabel();
   labelData.forEach((item) => {
     const anchorLabel = document.createElement('a');
-    anchorLabel.setAttribute(
-      'href',
-      `/naswa-address-book/label/?label=${item.id}`,
-    );
+
+    if (pathname.includes('naswa-address-book')) {
+      anchorLabel.setAttribute(
+        'href',
+        `/naswa-address-book/label/?label=${item.id}`,
+      );
+    } else {
+      anchorLabel.setAttribute('href', `/label/?label=${item.id}`);
+    }
+
     anchorLabel.setAttribute(
       'class',
       'rounded-xl ml-2 py-2 px-4 hover:bg-[#6987c9] hover:text-white',
@@ -396,4 +404,18 @@ function renderLabelForm() {
   // containerLabel.forEach((item)=>
   // )
   console.log(containerLabel, 'lables');
+}
+
+function adjustURL() {
+  const anchor = document.querySelectorAll('a');
+
+  anchor.forEach((item) => {
+    const url = new URL(item.href);
+
+    if (url.pathname.includes('naswa-address-book')) {
+      url.pathname += '/naswa-address-book';
+      item.href = url.toString();
+    }
+  });
+  console.log(anchor);
 }
