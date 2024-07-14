@@ -402,7 +402,7 @@ function adjustURL() {
   anchor.forEach((item) => {
     const url = new URL(item.href);
     console.log(pathname.includes('naswa-address-book'), 'condition adjust');
-    if (url.pathname.includes('naswa-address-book')) {
+    if (pathname.includes('naswa-address-book')) {
       url.pathname += '/naswa-address-book';
       item.href = url.toString();
     }
