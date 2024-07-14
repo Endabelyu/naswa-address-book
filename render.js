@@ -40,8 +40,7 @@ function renderTable() {
     tdAction.classList = 'flex justify-center gap-2 p-2';
     const editButton = document.createElement('a');
     if (pathname === '/' || pathname === '/naswa-address-book/') {
-      if (pathname.includes('naswa-address-book')) {
-        editButton.href = `/contact/?id=${item.id}`;
+      editButton.href = `/contact/?id=${item.id}`;
       editButton.innerHTML = `<svg
         xmlns='http://www.w3.org/2000/svg'
         x='0px'
