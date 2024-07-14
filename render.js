@@ -14,7 +14,7 @@ function renderTable() {
   };
 
   const renderContact =
-    pathname === '/'
+    pathname === '/' || pathname === 'naswa-address-book/'
       ? contactData(localContactData, '/')
       : pathname.includes('trash')
       ? contactData(localContactData, 'trash')
@@ -371,7 +371,10 @@ function renderLabelSidebar() {
   const labelData = getDataLabel();
   labelData.forEach((item) => {
     const anchorLabel = document.createElement('a');
-    anchorLabel.setAttribute('href', `/label/?label=${item.id}`);
+    anchorLabel.setAttribute(
+      'href',
+      `/naswa-address-book/label/?label=${item.id}`,
+    );
     anchorLabel.setAttribute(
       'class',
       'rounded-xl ml-2 py-2 px-4 hover:bg-[#6987c9] hover:text-white',
