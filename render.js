@@ -81,9 +81,13 @@ function renderTable() {
 
     container.appendChild(tr);
   });
+  renderLabelSidebar();
   renderCountDataContact(localContactData);
   renderCountTrash(localContactData);
   renderCountLabel(localContactData);
+  if (pathname.includes('create')) {
+    renderLabelForm();
+  }
 }
 function renderEditForm() {
   const localContactData = getDataStorage();
@@ -267,14 +271,15 @@ function renderCountSideBar() {
   renderCountLabel(localContactData);
 }
 function renderCountDataContact(data) {
-  const spanCountContact = document.getElementById('count-contacts');
+  const spanCountContact = document.querySelectorAll('.count-contacts');
   const homeData =
     data && data.length > 0
       ? data.filter((item) => item.createdAt && !item.deletedAt)
       : [];
   console.log(homeData);
   const countData = homeData.length;
-  if (spanCountContact) spanCountContact.innerText = countData;
+  if (spanCountContact)
+    spanCountContact.forEach((item) => (item.innerText = countData));
 }
 function renderCountTrash(data) {
   const spanCountTrash = document.querySelectorAll('#count-trash');
@@ -284,7 +289,7 @@ function renderCountTrash(data) {
   console.log(trashData, 'tras');
   spanCountTrash.forEach((item) => (item.innerText = trashData.length));
 }
-function renderCountLabel(data, labelId) {
+function renderCountLabel(data) {
   const spanCountContact = document.querySelectorAll(`.count-label`);
 
   spanCountContact.forEach((item) => {
@@ -359,4 +364,33 @@ function editContactData(event) {
   });
   addDataStorage('contactData', updatedContacts);
   renderEditForm();
+}
+
+function renderLabelSidebar() {
+  const containerLabel = document.querySelectorAll('.container-label');
+  const labelData = getDataLabel();
+  labelData.forEach((item) => {
+    const anchorLabel = document.createElement('a');
+    anchorLabel.setAttribute('href', `/label/?label=${item.id}`);
+    anchorLabel.setAttribute(
+      'class',
+      'rounded-xl ml-2 py-2 px-4 hover:bg-[#6987c9] hover:text-white',
+    );
+    const spanCountElement = document.createElement('span');
+    spanCountElement.setAttribute('id', item.id);
+    spanCountElement.setAttribute('class', 'count-label');
+    console.log(spanCountElement);
+    anchorLabel.innerHTML = `${item.value} (<span id="${item.id}" class="count-label">0</span>)`;
+    console.log(anchorLabel);
+
+    containerLabel.forEach((item) => item.appendChild(anchorLabel));
+  });
+  console.log(containerLabel);
+}
+
+function renderLabelForm() {
+  const containerLabel = document.querySelectorAll('.container-select-label');
+  containerLabel.forEach((item)=>
+  )
+  console.log(containerLabel, 'lables');
 }
