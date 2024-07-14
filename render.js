@@ -17,7 +17,7 @@ function renderTable() {
     pathname === '/'
       ? contactData(localContactData, '/')
       : pathname === '/naswa-address-book/'
-      ? contactData(localContactData, '/naswa-address-book')
+      ? contactData(localContactData, '/')
       : pathname.includes('trash')
       ? contactData(localContactData, 'trash')
       : contactData(localContactData, 'label', labelId);
@@ -316,7 +316,7 @@ function contactData(data, pathname, id) {
     'datalocal',
   );
   switch (pathname) {
-    case '/' || '/naswa-address-book/':
+    case '/':
       return data.filter((item) => item.createdAt && !item.deletedAt);
     case 'trash':
       console.log('trash');
