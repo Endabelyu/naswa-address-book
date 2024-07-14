@@ -95,6 +95,32 @@ function addNewContact(event) {
 
 console.log(formElement, 'form');
 if (formElement) {
+  const inputs = formElement.querySelectorAll(
+    'input[type="text"],input[type="email"], textarea',
+  );
+  console.log(inputs);
+  // this event listener to make style when value inside input or text area empty or deleted
+  inputs.forEach((input) => {
+    const labelId = input.id + 'Label';
+    const label = document.getElementById(labelId);
+    if (input.value) {
+      label.classList.remove('top-4', 'text-gray-400', 'left-3');
+      label.classList.add('-top-4', 'text-sm', 'text-slate-500');
+    }
+    // console.log(input.value, 'values');
+    // const labelId = input.id + 'Label';
+    // const label = document.getElementById(labelId);
+    input.addEventListener('blur', function () {
+      if (input.value) {
+        label.classList.remove('top-4', 'text-gray-400', 'left-3');
+        label.classList.add('-top-4', 'text-sm', 'text-slate-500');
+      } else {
+        label.classList.add('top-4', 'text-gray-400', 'left-3');
+      }
+    });
+  });
+  // this event listener to make style when value inside input or text area empty or deleted
+
   formElement.addEventListener('submit', addNewContact);
 }
 
