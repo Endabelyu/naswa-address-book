@@ -7,38 +7,100 @@
     <title>Create | Contact Address Book</title>
   </head>
   <body>
-    <header class="fixed md:overflow-y-auto  top-0 p-8 w-full gap-8 border-r-2 shadow-sidebot md:min-h-screen flex flex-col md:shadow-sideright  md:left-0 md:w-[18rem] ">
-      <a href="/">
-        <h1 class="font-bold text-2xl">Contacts Book</h1>
-      </a>
-        <a href="/contact/create-contact.html" class="md:block w-3/4 rounded-xl bg-[#6987c9] py-2 px-4 text-slate-100 hidden">Create Contact</a> 
-          <nav class="flex pb-2 md:flex-col gap-8 overflow-x-auto w-full md:h-[18rem] overflow-y-auto">
-          <div class="container-button
-          flex md:flex-col gap-4">
-         
-            <a href="#" class="rounded-xl  py-2 px-4 ">Favourite</a>
-            <a href="#" class="rounded-xl  py-2 px-4 ">Trash</a>
-          </div>
-          <div class="container-label
-          flex md:flex-col gap-4">
-            <a href="#" class="rounded-xl py-2 px-4 ">Label</a>
-            <a href="#" class="rounded-xl py-2 px-4  ">Home</a>
-            <a href="#" class="rounded-xl py-2 px-4  ">Work</a>
-          </div>
-         
-         
-        </nav>
-        <footer class="md:block hidden">
-          <p class="text-[#A11B1B] font-medium text-center text-sm">
-            © Naswa Wilantama 2024 <br> All Rights Reserved.
-          </p>
-        </footer>
-    </header>
-    <main class="h-fit md:ml-[18rem] p-10    ">
+    <header
+    class="fixed md:overflow-y-auto top-0 p-8 w-full gap-8 border-r-2 shadow-sidebot md:min-h-screen flex flex-col md:shadow-sideright md:left-0 md:w-[18rem]"
+  >
+    <a href="/">
+      <h1 class="font-bold text-2xl">Contacts Book</h1>
+    </a>
+    <a
+      href="/contact/create-contact.html"
+      class="w-10/12 rounded-xl bg-[#6987c9] py-2 px-4 md:flex gap-4 text-slate-100 hidden"
+    >
+      <p class="self-center">Create Contact</p>
+
+      <svg
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        fill=""
+        class="w-7 fill-white sl"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <title></title>
+          <g id="Complete">
+            <g data-name="add" id="add-2">
+              <g>
+                <line
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  x1="12"
+                  x2="12"
+                  y1="19"
+                  y2="5"
+                ></line>
+                <line
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  x1="5"
+                  x2="19"
+                  y1="12"
+                  y2="12"
+                ></line>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </a>
+    <nav
+      class="flex pb-2 md:flex-col gap-8 overflow-x-auto w-full md:h-[18rem] overflow-y-auto"
+    >
+      <div class="container-button flex md:flex-col gap-4">
+        <!-- <a href="/contact/create-contact.html" class="rounded-xl  py-2 px-4 ">Favourite</a> -->
+        <a
+          href="/trash.html"
+          class="rounded-xl py-2 px-4 hover:bg-[#6987c9] hover:text-white"
+          >Trash (<span id="count-trash" class="">0</span>)</a
+        >
+      </div>
+      <div class="container-label flex md:flex-col gap-4">
+        <a href="/contact/label.html" class="rounded-xl py-2 px-4">Label</a>
+        <a
+          href="/label/?label=1"
+          class="rounded-xl ml-2 py-2 px-4 hover:bg-[#6987c9] hover:text-white"
+          >Home (<span id="1" class="count-label">0</span>)</a
+        >
+        <a
+          href="/label/?label=2"
+          class="rounded-xl ml-2 py-2 px-4 hover:bg-[#6987c9] hover:text-white"
+          >Work (<span id="2" class="count-label">0</span>)
+        </a>
+      </div>
+    </nav>
+    <footer class="md:block hidden">
+      <p class="text-[#A11B1B] font-medium text-center text-sm">
+        © Naswa Wilantama 2024 <br />
+        All Rights Reserved.
+      </p>
+    </footer>
+  </header>
+    <main class="h-fit md:ml-[18rem] p-10    "> 
       <h2 class="text-2xl font-semibold mb-10">Create Contact</h2>
      
       <section class="container-data w-10/12 mt-8 relative px-4 overflow-y-auto p-2">
-          <form id="contact-form">
+          <form id="contact-form" method="post">
             <div class="container-button  flex flex-col justify-between  rounded-md py-4 ">
               <ul class="flex justify-between">
                 <li class="self-center">
@@ -46,7 +108,7 @@
       
                 </li>
                 <li class="flex gap-4">
-                  <button>favourite</button>
+                  <!-- <button>favourite</button> -->
                   <button class="bg-primary text-slate-100 rounded-xl py-2 px-4">Save</button>
       
                 </li>
@@ -56,18 +118,22 @@
             <div class="container-name flex gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="person" class="w-8 self-start mt-2"><g><path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm6 10a1 1 0 0 0 1-1 7 7 0 0 0-14 0 1 1 0 0 0 1 1z" ></path></g></svg>
 
-            <div class="container-input flex flex-col gap-2 w-10/12">              
-              <div class="relative py-2 bg-transparent">
-              <input type="text" id="firstName" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-              <label for="firstName" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">First Name</label>
+            <div class="container-input flex flex-col gap-2 w-10/12">  
+              <div>
+
+              </div>            
+              <div class="relative py-3 bg-transparent">
+              <input type="text" id="firstName" name='firstName' placeholder="" class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required
+             >
+              <label for="firstName" id='firstNameLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">First Name</label>
               </div>
-            <div class="relative py-2 bg-transparent">
-              <input type="text" id="middleName" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-              <label for="middleName" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Middle Name</label>
+            <div class="relative py-3 bg-transparent">
+              <input type="text" id="middleName" name='middleName' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+              <label for="middleName" id='middleNameLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Middle Name</label>
           </div>
-            <div class="relative py-2 bg-transparent">
-              <input type="text" id="lastName" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-              <label for="lastName" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Last Name</label>
+            <div class="relative py-3 bg-transparent">
+              <input type="text" id="lastName" name='lastName' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+              <label for="lastName" id='lastNameLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Last Name</label>
           </div>
             
             
@@ -79,17 +145,14 @@
                 <div class="container-input flex flex-col gap-2 w-10/12">
 
                 
-                <div class="relative py-2 bg-transparent">
-                  <input type="text" id="Company" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="Company" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Company</label>
+                <div class="relative py-3 bg-transparent">
+                  <input type="text" id="company" name="company" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="Company" id='companyLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Company</label>
               </div>
-              <div class="relative py-2 bg-transparent">
-                  <input type="text" id="jobTitle" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="jobTitle" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Job Title</label>
+              <div class="relative py-3 bg-transparent">
+                  <input type="text" id="jobTitle" name="jobTitle" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="jobTitle"  id='jobTitleLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Job Title</label>
               </div>
-              
-              
-              
               </div>
             </div>
             <div class="container-email flex gap-3">
@@ -97,9 +160,9 @@
                 <div class="container-input flex flex-col gap-2 w-10/12">
 
                 
-                <div class="relative py-2 bg-transparent">
-                  <input type="email" id="email" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="email" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Email</label>
+                <div class="relative py-3 bg-transparent">
+                  <input type="email" id="email" name="email" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="email"  id='emailLabel' class="absolute transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Email</label>
               </div>
               </div>
             </div>
@@ -108,9 +171,9 @@
                 <div class="container-input flex flex-col gap-2 w-10/12">
 
                 
-                <div class="relative py-2 bg-transparent">
-                  <input type="text" id="phone" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="phone" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Phone</label>
+                <div class="relative py-3 bg-transparent">
+                  <input type="text" id="phone" name='phone' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="phone" id="phoneLabel" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600  ">Phone</label>
               </div>
               </div>
             </div>
@@ -119,30 +182,27 @@
                 <div class="container-input flex flex-col gap-2 w-10/12">
 
                 
-                <div class="relative py-2 bg-transparent">
-                  <input type="text" id="streetAddress" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="streetAddress" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Street Address</label>
+                <div class="relative py-3 bg-transparent">
+                  <input type="text" id="streetAddress" name='streetAddress' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="streetAddress" id="streetAddressLabel" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Street Address</label>
               </div>
-                <div class="relative py-2 bg-transparent">
-                  <input type="text" id="streetAddress2" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="streetAddress2" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Street Address 2</label>
+                <div class="relative py-3 bg-transparent">
+                  <input type="text" id="streetAddress2" name='streetAddress2' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="streetAddress2" id="streetAddress2Label" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600  ">Street Address 2</label>
               </div>
-                <div class="relative py-2 bg-transparent">
-                  <input type="text" id="city" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="city" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">City</label>
+                <div class="relative py-3 bg-transparent">
+                  <input type="text" id="city" name='city' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="city" id="cityLabel" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">City</label>
               </div>
-                <div class="relative py-2 bg-transparent">
-                  <input type="text" id="province" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="province" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Province</label>
+                <div class="relative py-3 bg-transparent">
+                  <input type="text" id="province" name="province" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="province" id="provinceLabel" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600  ">Province</label>
               </div>
-                <div class="relative py-2 bg-transparent">
-                  <input type="text" id="postalCode" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="postalCode" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Postal Code</label>
+                <div class="relative py-3 bg-transparent">
+                  <input type="text" id="postalCode" name="postalCode" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                  <label for="postalCode" id="postalCodeLabel" class="absolute transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Postal Code</label>
               </div>
-                <div class="relative py-2 bg-transparent">
-                  <input type="text" id="label" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <label for="label" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Label</label>
-              </div>
+               
               </div>
             </div>
             <div class="container-notes flex gap-3">
@@ -150,10 +210,10 @@
                 <div class="container-input flex flex-col gap-2 w-10/12">
 
                 
-                <div class="relative py-2 bg-transparent">
-                  <textarea type="text" id="notes" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent h-32"></textarea>
+                <div class="relative py-3 bg-transparent">
+                  <textarea type="text" id="notes" name='notes' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent h-32"  required></textarea>
                  
-                  <label for="notes" class="absolute left-3 top-3 text-gray-400  transition-all duration-200 peer-placeholder-shown:left-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-600 ">Notes</label>
+                  <label for="notes" id="notesLabel" class="absolute transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600">Notes</label>
               </div>
               </div>
             </div>
@@ -163,6 +223,8 @@
     </main>
    
     <button class="fixed bottom-12 right-10 rounded-full z-30 bg-primary text-slate-100 p-4 md:hidden">C</button>
-  </body>
-  <script type='module' src="index.js"></script
+    <script src="../render.js"></script>
+    <script src="../storage.js"></script>
+    <script src="../index.js"></script> </body>
+   
 </html>

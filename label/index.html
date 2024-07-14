@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="output.css" />
-    <title>Home | Contact Address Book</title>
+    <link rel="stylesheet" href="../output.css" />
+    <title>Label | Contact Address Book</title>
   </head>
   <body>
     <header
@@ -98,7 +98,6 @@
     </header>
     <main class="min-h-screen md:ml-[18rem] p-10 md:mt-10 mt-32">
       <section class="searchbar mb-12">
-        <!-- <form id="search-form" method="get" class="flex"> -->
         <div
           class="flex gap-2 shadow-md rounded-md bg-white p-1 w-8/12 mx-auto"
         >
@@ -110,13 +109,10 @@
             placeholder="Type to search ..."
           />
         </div>
-        <!-- </form> -->
       </section>
 
       <section class="contacts">
-        <h3 class="text-2xl">
-          Contacts (<span id="count-contacts" class="">0</span>)
-        </h3>
+        <h3 class="text-2xl" id="title-label">Label</h3>
         <table class="mt-8 table-fixed w-full text-center">
           <thead class="border-b-2 border-slate-400 p-2">
             <th class="p-2">Name</th>
