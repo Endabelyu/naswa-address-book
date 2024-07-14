@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../output.css" />
+    <title>Edit | Contact Address Book</title>
+  </head>
+  <body>
+    <header
+      class="fixed md:overflow-y-auto top-0 p-8 w-full gap-8 border-r-2 shadow-sidebot md:min-h-screen flex flex-col md:shadow-sideright md:left-0 md:w-[18rem]"
+    >
+      <a href="/">
+        <h1 class="font-bold text-2xl">Contacts Book</h1>
+      </a>
+      <a
+        href="/contact/create-contact.html"
+        class="w-10/12 rounded-xl bg-[#6987c9] py-2 px-4 md:flex gap-4 text-slate-100 hidden"
+      >
+        <p class="self-center">Create Contact</p>
+
+        <svg
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          fill=""
+          class="w-7 fill-white sl"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <title></title>
+            <g id="Complete">
+              <g data-name="add" id="add-2">
+                <g>
+                  <line
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    x1="12"
+                    x2="12"
+                    y1="19"
+                    y2="5"
+                  ></line>
+                  <line
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    x1="5"
+                    x2="19"
+                    y1="12"
+                    y2="12"
+                  ></line>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+      <nav
+        class="flex pb-2 md:flex-col gap-8 overflow-x-auto w-full md:h-[18rem] overflow-y-auto"
+      >
+        <div class="container-button flex md:flex-col gap-4">
+          <!-- <a href="/contact/create-contact.html" class="rounded-xl  py-2 px-4 ">Favourite</a> -->
+          <a
+            href="/trash.html"
+            class="rounded-xl py-2 px-4 hover:bg-[#6987c9] hover:text-white"
+            >Trash (<span id="count-trash" class="">0</span>)</a
+          >
+        </div>
+        <div class="container-label flex md:flex-col gap-4">
+          <a href="/contact/label.html" class="rounded-xl py-2 px-4">Label</a>
+          <a
+            href="/label/?label=1"
+            class="rounded-xl ml-2 py-2 px-4 hover:bg-[#6987c9] hover:text-white"
+            >Home (<span id="1" class="count-label">0</span>)</a
+          >
+          <a
+            href="/label/?label=2"
+            class="rounded-xl ml-2 py-2 px-4 hover:bg-[#6987c9] hover:text-white"
+            >Work (<span id="2" class="count-label">0</span>)
+          </a>
+        </div>
+      </nav>
+      <footer class="md:block hidden">
+        <p class="text-[#A11B1B] font-medium text-center text-sm">
+          © Naswa Wilantama 2024 <br />
+          All Rights Reserved.
+        </p>
+      </footer>
+    </header>
+    <main class="h-fit md:ml-[18rem] p-10">
+      <h2 class="text-2xl font-semibold mb-10">Edit Contact</h2>
+
+      <section
+        class="container-data-edit w-10/12 mt-8 relative px-4 overflow-y-auto p-2"
+      ></section>
+    </main>
+
+    <button
+      class="fixed bottom-12 right-10 rounded-full z-30 bg-primary text-slate-100 p-4 md:hidden"
+    >
+      C
+    </button>
+    <script src="../render.js"></script>
+    <script src="../storage.js"></script>
+    <script src="../index.js"></script>
+  </body>
+</html>
