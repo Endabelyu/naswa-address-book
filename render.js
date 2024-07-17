@@ -82,10 +82,13 @@ function renderTable() {
 
     container.appendChild(tr);
   });
+
   renderLabelSidebar();
   renderCountDataContact(localContactData);
   renderCountTrash(localContactData);
   renderCountLabel(localContactData);
+  renderTitleLabel(labelId);
+
   if (pathname.includes('create')) {
     renderLabelForm();
   }
@@ -94,9 +97,8 @@ function renderEditForm() {
   const localContactData = getDataStorage();
   const containerForm = document.querySelector('.container-data-edit');
   const dataId = Number(url.get('id'));
-  console.log(dataId);
   const dataWithId = getDataById(dataId);
-  console.log(dataWithId.notes, 'data id');
+  selectedLabels = dataWithId.label;
   const formEdit = `<form id="contact-form-edit" >
             <div class="container-button  flex flex-col justify-between  rounded-md py-4 ">
               <ul class="flex justify-between">
@@ -112,20 +114,41 @@ function renderEditForm() {
             
               </div>
             <div class="overflow-y-auto h-[80dvh]  pt-10 flex flex-col gap-4">
+            <div class="container-checkbox-label justify-center relative flex flex-col gap-4">
+                <h3 class="text-center text-2xl">Select Label Contact</h3>
+                <div class="flex gap-8 justify-center">
+
+                <div class="relative">
+                  <input type="checkbox" id="home" name="home" class='peer absolute z-10 w-8 h-8 -top-1 right-4 hidden' checked='${false}'value='1'>
+                  <label for="home"id='homeLabel' class=" bg-white p-1 rounded shadow-md cursor-pointer">Home</label><br>
+                </div>
+                <div class="relative">
+                  <input type="checkbox" id="work" name="work" class='peer absolute z-10 w-8 h-8 -top-1 right-4 hidden' checked='${false}'  value='2'>
+                  <label for="work" id='workLabel' class=" bg-white p-1 rounded shadow-md cursor-pointer">Work</label><br>
+                </div>
+              </div>
+
+              </div>  
             <div class="container-name flex gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="person" class="w-8 self-start mt-2"><g><path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm6 10a1 1 0 0 0 1-1 7 7 0 0 0-14 0 1 1 0 0 0 1 1z" ></path></g></svg>
 
             <div class="container-input flex flex-col gap-2 w-10/12">              
               <div class="relative py-3 bg-transparent">
-              <input type="text" id="firstName" name='firstName' placeholder="" class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.firstName}" required>
+              <input type="text" id="firstName" name='firstName' placeholder="" class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                dataWithId.firstName
+              }" required>
               <label for="firstName" id='firstNameLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">First Name</label>
               </div>
             <div class="relative py-3 bg-transparent">
-              <input type="text" id="middleName" name='middleName' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.middleName}" required>
+              <input type="text" id="middleName" name='middleName' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                dataWithId.middleName
+              }" required>
               <label for="middleName" id='middleNameLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Middle Name</label>
           </div>
             <div class="relative py-3 bg-transparent">
-              <input type="text" id="lastName" name='lastName' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.lastName}" required>
+              <input type="text" id="lastName" name='lastName' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                dataWithId.lastName
+              }" required>
               <label for="lastName" id='lastNameLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Last Name</label>
           </div>
             
@@ -139,11 +162,15 @@ function renderEditForm() {
 
                 
                 <div class="relative py-3 bg-transparent">
-                  <input type="text" id="company" name="company" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.company}" required>
+                  <input type="text" id="company" name="company" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.company
+                  }" required>
                   <label for="Company" id='companyLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Company</label>
               </div>
               <div class="relative py-3 bg-transparent">
-                  <input type="text" id="jobTitle" name="jobTitle" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.jobTitle}" required>
+                  <input type="text" id="jobTitle" name="jobTitle" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.jobTitle
+                  }" required>
                   <label for="jobTitle"  id='jobTitleLabel' class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Job Title</label>
               </div>
               </div>
@@ -154,7 +181,9 @@ function renderEditForm() {
 
                 
                 <div class="relative py-3 bg-transparent">
-                  <input type="email" id="email" name="email" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.email}" required>
+                  <input type="email" id="email" name="email" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.email
+                  }" required>
                   <label for="email"  id='emailLabel' class="absolute transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Email</label>
               </div>
               </div>
@@ -165,7 +194,9 @@ function renderEditForm() {
 
                 
                 <div class="relative py-3 bg-transparent">
-                  <input type="text" id="phone" name='phone' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.phone}" required>
+                  <input type="text" id="phone" name='phone' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.phone
+                  }" required>
                   <label for="phone" id="phoneLabel" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600  ">Phone</label>
               </div>
               </div>
@@ -176,23 +207,33 @@ function renderEditForm() {
 
                 
                 <div class="relative py-3 bg-transparent">
-                  <input type="text" id="streetAddress" name='streetAddress' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.streetAddress}" required>
+                  <input type="text" id="streetAddress" name='streetAddress' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.streetAddress
+                  }" required>
                   <label for="streetAddress" id="streetAddressLabel" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Street Address</label>
               </div>
                 <div class="relative py-3 bg-transparent">
-                  <input type="text" id="streetAddress2" name='streetAddress2' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.streetAddress2}" required>
+                  <input type="text" id="streetAddress2" name='streetAddress2' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.streetAddress2
+                  }" required>
                   <label for="streetAddress2" id="streetAddress2Label" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600  ">Street Address 2</label>
               </div>
                 <div class="relative py-3 bg-transparent">
-                  <input type="text" id="city" name='city' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.city}" required>
+                  <input type="text" id="city" name='city' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.city
+                  }" required>
                   <label for="city" id="cityLabel" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">City</label>
               </div>
                 <div class="relative py-3 bg-transparent">
-                  <input type="text" id="province" name="province" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.province}" required>
+                  <input type="text" id="province" name="province" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.province
+                  }" required>
                   <label for="province" id="provinceLabel" class="absolute   transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600  ">Province</label>
               </div>
                 <div class="relative py-3 bg-transparent">
-                  <input type="text" id="postalCode" name="postalCode" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${dataWithId.postalCode}" required>
+                  <input type="text" id="postalCode" name="postalCode" placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="${
+                    dataWithId.postalCode
+                  }" required>
                   <label for="postalCode" id="postalCodeLabel" class="absolute transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600 ">Postal Code</label>
               </div>
               </div>
@@ -203,7 +244,9 @@ function renderEditForm() {
 
                 
                 <div class="relative py-3 bg-transparent">
-                  <textarea type="text" id="notes" name='notes' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent h-32" value="${dataWithId.notes}" required>${dataWithId.notes}</textarea>
+                  <textarea type="text" id="notes" name='notes' placeholder=" " class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent h-32" value="${
+                    dataWithId.notes
+                  }" required>${dataWithId.notes}</textarea>
                  
                   <label for="notes" id="notesLabel" class="absolute transition-all duration-200  top-4 left-3 text-gray-400 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-blue-600">Notes</label>
               </div>
@@ -212,10 +255,10 @@ function renderEditForm() {
           </div>
           </form>`;
   containerForm.innerHTML = formEdit;
+  // checkCheckboxes();
+
   const formEditElement = document.getElementById('contact-form-edit');
   formEditElement.addEventListener('submit', editContactData);
-
-  console.log(formEditElement);
   const inputs = formEditElement.querySelectorAll(
     'input[type="text"],input[type="email"], textarea',
   );
@@ -240,7 +283,9 @@ function renderEditForm() {
       }
     });
   });
+
   // this event listener to make style when value inside input or text area empty or deleted
+  renderLabelSidebar();
   renderCountDataContact(localContactData);
   renderCountTrash(localContactData);
   renderCountLabel(localContactData);
@@ -248,6 +293,8 @@ function renderEditForm() {
 
 function renderCountSideBar() {
   // this event listener to make style when value inside input or text area empty or deleted
+  const localContactData = getDataStorage();
+  console.log(localContactData);
 
   const inputs = formElement.querySelectorAll(
     'input[type="text"],input[type="email"], textarea',
@@ -266,7 +313,7 @@ function renderCountSideBar() {
     });
   });
   // this event listener to make style when value inside input or text area empty or deleted
-  const localContactData = getDataStorage();
+  renderLabelSidebar();
   renderCountDataContact(localContactData);
   renderCountTrash(localContactData);
   renderCountLabel(localContactData);
@@ -350,8 +397,7 @@ function editContactData(event) {
     city: formContactData.get('city'),
     province: formContactData.get('province'),
     postalCode: formContactData.get('postalCode'),
-    // label: formContactData.get('label'),
-    label: [1, 2],
+    label: selectedLabels,
     notes: formContactData.get('notes'),
     deletedAt: null,
     createdAt: today,
@@ -399,6 +445,7 @@ function renderLabelForm() {
 function adjustURL() {
   const anchor = document.querySelectorAll('a');
 
+  console.log(anchor);
   anchor.forEach((item) => {
     const url = new URL(item.href);
     let newHref = '';
@@ -410,4 +457,53 @@ function adjustURL() {
     }
   });
   console.log(anchor);
+}
+function checkCheckboxes(data) {
+  // Loop through each checkboxs
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    const labelId = checkbox.id + 'Label';
+    const label = document.getElementById(labelId);
+    const isChecked = data.includes(Number(checkbox.value));
+    if (isChecked) {
+      label.classList.add('peer-checked:bg-primary', 'peer-checked:text-white');
+      // label.setAttribute(
+      //   'class',
+      //   'peer-checked:bg-primary peer-checked:text-white bg-white p-1 rounded shadow-md cursor-pointer',
+      // );
+    } else {
+      if (
+        label.classList.contains(
+          'peer-checked:bg-primary',
+          'peer-checked:text-white',
+        )
+      ) {
+        label.classList.remove(
+          'peer-checked:bg-primary',
+          'peer-checked:text-white',
+        );
+      }
+    }
+  });
+}
+
+// // Example usage
+// const dataCheckbox = {
+//   label: [1, 3], // Assuming the checkbox values are numbers
+// };
+
+// checkCheckboxes(dataCheckbox);
+
+function renderTitleLabel(id) {
+  const titleHeader = document.querySelectorAll('#title-label');
+  console.log(titleHeader);
+  console.log(id, 'label id');
+
+  titleHeader.forEach((header) => {
+    if (id === 1) {
+      header.innerText = 'Home';
+    } else if (id === 2) {
+      header.innerText = 'Work';
+    }
+  });
 }

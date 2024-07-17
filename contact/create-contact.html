@@ -94,6 +94,7 @@
      
       <section class="container-data w-10/12 mt-8 relative px-4 overflow-y-auto p-2">
           <form id="contact-form" method="post">
+            
             <div class="container-button  flex flex-col justify-between  rounded-md py-4 ">
               <ul class="flex justify-between">
                 <li class="self-center">
@@ -108,12 +109,26 @@
             
               </div>
             <div class="overflow-y-auto h-[80dvh]  pt-10 flex flex-col gap-4">
+              <div class="container-checkbox-label justify-center relative flex flex-col gap-4">
+                <h3 class="text-center text-2xl">Select Label Contact</h3>
+                <div class="flex gap-8 justify-center">
+
+                <div class="relative">
+                  <input type="checkbox" id="home" name="home" class='peer absolute z-10 w-8 h-8 -top-1 right-4 hidden' value="1">
+                  <label for="home" id='home' class="peer-checked:bg-primary peer-checked:text-white bg-white p-1 rounded shadow-md cursor-pointer">Home</label><br>
+                </div>
+                <div class="relative">
+                  <input type="checkbox" id="work" name="work" class='peer absolute z-10 w-8 h-8 -top-1 right-4 hidden' value="2">
+                  <label for="work" id='work' class="peer-checked:bg-primary peer-checked:text-white bg-white p-1 rounded shadow-md cursor-pointer">Work</label><br>
+                </div>
+              </div>
+
+              </div>            
             <div class="container-name flex gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="person" class="w-8 self-start mt-2"><g><path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm6 10a1 1 0 0 0 1-1 7 7 0 0 0-14 0 1 1 0 0 0 1 1z" ></path></g></svg>
 
-            <div class="container-input flex flex-col gap-2 w-10/12">  
-              <div class="container-select-label">
-              </div>            
+            <div class="container-input py-3 bg-transparent  flex flex-col gap-2 w-10/12">  
+            
               <div class="relative py-3 bg-transparent">
               <input type="text" id="firstName" name='firstName' placeholder="" class=" peer block w-full appearance-none  rounded-md py-2 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required
              >

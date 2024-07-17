@@ -1,5 +1,6 @@
 const formElement = document.getElementById('contact-form');
 const inputSearch = document.getElementById('search-input');
+let selectedLabels = [];
 if (getSearchData) {
   deleteStorageData('searchData');
 }
@@ -25,7 +26,7 @@ const defaultContacts = [
     province: 'CA',
     postalCode: '12345',
     label: [1, 2],
-    note: 'Met at conference.',
+    notes: 'Met at conference.',
     deletedAt: null,
     createdAt: today,
   },
@@ -44,16 +45,22 @@ const defaultContacts = [
     province: 'TX',
     postalCode: '67890',
     label: [2],
-    note: 'Works in marketing.',
+    notes: 'Works in marketing.',
     deletedAt: null,
     createdAt: today,
   },
 ];
-console.log(pathname);
+
 const defaultLabel = [
   { id: 1, value: 'Home' },
   { id: 2, value: 'Work' },
 ];
+if (pathname.includes('contact')) {
+  if (pathname.includes('create-contact')) {
+    selectedLabels = [];
+  }
+  selectCheckbox();
+}
 function getLabelValue(id) {
   const label = defaultLabel.find((item) => item.id === id);
   return label ? label.value : '';
@@ -63,6 +70,24 @@ if (!localContactData) {
   addDataLabel(defaultLabel);
 }
 
+function selectCheckbox() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  console.log(checkboxes, 'boxes');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', function () {
+      if (this.checked) {
+        selectedLabels.push(Number(this.value)); // Add value to array when checked
+      } else {
+        const index = selectedLabels.indexOf(Number(this.value));
+        if (index !== -1) {
+          selectedLabels.splice(index, 1); // Remove value from array when unchecked
+        }
+      }
+
+      console.log(selectedLabels); // Log the array (you can replace this with your logic to use the array)
+    });
+  });
+}
 function addNewContact(event) {
   event.preventDefault();
 
@@ -83,7 +108,7 @@ function addNewContact(event) {
     province: formContactData.get('province'),
     postalCode: formContactData.get('postalCode'),
     // label: formContactData.get('label'),
-    label: [],
+    label: selectedLabels,
     notes: formContactData.get('notes'),
     deletedAt: null,
     createdAt: today,
@@ -156,7 +181,9 @@ if (!search.includes('id') && !pathname.includes('create')) {
   window.addEventListener('DOMContentLoaded', renderTable);
 } else if (search.includes('id')) {
   window.addEventListener('DOMContentLoaded', renderEditForm);
-} else {
+  window.addEventListener('DOMContentLoaded', selectCheckbox);
+  window.addEventListener('DOMContentLoaded', checkCheckboxes(selectCheckbox));
+} else if (pathname.includes('contact')) {
   window.addEventListener('DOMContentLoaded', renderCountSideBar);
 }
 window.addEventListener('DOMContentLoaded', adjustURL);
